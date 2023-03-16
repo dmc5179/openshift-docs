@@ -1,0 +1,22 @@
+:_content-type: PROCEDURE
+[id="installation-aws-icmp_postinstall_{context}"]
+= Post-Installtion procedures for OpenShift 4 deployed using the AWS IC Marketplace
+
+Installing the cluster from the marketplace requires that the OpenShift 4 content AMI is launched and available to the OpenShift cluster node.
+
+.Prerequisites
+
+* You configured an AWS account.
+* You created an Amazon S3 bucket with the required IAM
+link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role[service role].
+* You uploaded your {op-system} VMDK file to Amazon S3.
+ifdef::openshift-enterprise,openshift-webscale[]
+The {op-system} VMDK file must be the highest version that is less than or equal to the {product-title} version you are installing.
+endif::[]
+* You downloaded the AWS CLI and installed it on your computer. See
+link:https://docs.aws.amazon.com/cli/latest/userguide/install-bundle.html[Install the AWS CLI Using the Bundled Installer].
+
+.Procedure
+
+. Export your AWS profile as an environment variable:
+

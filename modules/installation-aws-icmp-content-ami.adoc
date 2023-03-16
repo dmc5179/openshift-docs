@@ -1,0 +1,32 @@
+
+
+:_content-type: PROCEDURE
+[id="launching_ocp4_content_ami_{context}"]
+= Launching the OpenShift 4 content AMI in AWS
+
+Installing the cluster from the marketplace requires that the OpenShift 4 content AMI is launched and available to the OpenShift cluster node.
+
+.Prerequisites
+
+* You configured an AWS account.
+* You created an Amazon S3 bucket with the required IAM
+link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role[service role].
+
+.Procedure
+
+. Subscribe to the OpenShift 4 Marketplace Offering in the AWS Marketplace
+. Deploy an instance of the Quay AMI that comes with the Marketplace offering.
++
+This will be know as the registry
++
+[IMPORTANT] 
+====
+When the Content AMI is launched a quay registry will be installed and the OpenShift 4 container image content will be loaded into the Quay registry.
+This process can take from 30-60 minutes to complete
+==== 
+. ssh into the registry as the ec2-user
+. Check the the import process has completed
+[source,terminal]
+----
+$ if [ -e /etc/sysconfig/rh-quay-firstboot ]; then echo "Content AMI Import Complete"; fi
+----
