@@ -11,13 +11,19 @@ Installing the cluster from the marketplace requires that the OpenShift 4 conten
 * You configured an AWS account.
 * You created an Amazon S3 bucket with the required IAM
 link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role[service role].
+* You subscribed to the AWS IC Marketplace offer
 
 .Procedure
 
-. Subscribe to the OpenShift 4 Marketplace Offering in the AWS Marketplace
-. Deploy an instance of the Quay AMI that comes with the Marketplace offering.
+. Open the AWS Web Console and login to the account where OpenShift will be installed
+. Browse to the EC2 service
+. Browse to the available AMIs
+. Select the Quay Content AMI from the OpenShift 4 AWS IC Marketplace offering
+. Select "Launch an instance of this AMI"
+. Enter options for launching the EC2 instance including; VPC, subnet, IAM instance profile, etc...
+. Launch the Quay Content AMI for OpenShift
 +
-This will be know as the registry
+This will be known as the registry
 +
 [IMPORTANT] 
 ====

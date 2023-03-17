@@ -9,10 +9,6 @@ Required installation configuration parameters are described in the following ta
 |====
 |Parameter|Description|Values
 
-|`apiVersion`
-|The API version for the `install-config.yaml` content. The current version is `v1`. The installation program may also support older API versions.
-|String
-
 |`pull_secret`
 |Full path to the pull secret for your container registry
 |'{{ mirror_base }}/pull-secret.txt'
