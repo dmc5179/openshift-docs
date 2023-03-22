@@ -26,47 +26,43 @@ Required installation configuration parameters are described in the following ta
 |'caas'
 
 |`infrastructure_id`
-|a
+|Label added to all AWS resources. This must match between AWS and the cluster. Must be unique per cluster in the same AWS account
 |'abc12'
 
 |`worker_count`
-|a
+| The number of worker nodes to provision. Defaults to 3. Minimum for Ingress HA is 2
 |3
 
 |`mirror_registry`
-|a
-|'bastion.{{ ocp_base_domain }}'
+|Hostname of the container registry. Defaults to the hostname when the ansible will be run and the registry is running
+|'{{ ansible_env.HOSTNAME }}'
 
 |`mirror_registry_port`
-|a
+| Port the container registry is running on. Defaults to the port used by Quay on the Marketplace content AMI
 |8443
 
 |`fips_enabled`
-|a
+| Set to true to enable cluster wide FIPS
 |false
 
 |`certificate_bundle`
-|a
+| General certificate bundle to add to the cluster. Defaults to the cert created during the quay registry install. This should include certs for any HTTPS service the cluster will need to communicate with
 |'/etc/pki/ca-trust/source/anchors/registry.crt'
 
 |`cluster_network_cidr`
-|a
+| Pod Network. Default does not generally need to be changed
 |'10.128.0.0/14'
 
 |`cluster_network_prefix`
-|a
+| Pod Network Prefix. Default does not generally need to be changed
 |23
 
 |`service_network_cidr`
-|a
+| Cluster Internal service network layer. Default does not generally need to be changed
 |'172.30.0.0/16'
 
-|`machine_network_cidr`
-|a
-|'10.156.240.0/22'
-
 |`mtu`
-|a
+|The MTU set on each cluster node. Note that an incorrect value can cause bizzare behavior due to packet loss
 |8500
 
 |`network_policy`
@@ -86,31 +82,31 @@ Required installation configuration parameters are described in the following ta
 |'a'
 
 |`vpc_id`
-|a
+|VPC ID to install OpenShift cluster
 |'vpc-'
 
 |`ec2_instance_type.bootstrap`
-|a
+|EC2 instance type for bootstrap node
 |'i3.large'
 
 |`ec2_instance_type.master`
-|a
+|EC2 instance type for master nodes
 |'m5.xlarge'
 
 |`ec2_instance_type.worker`
-|a
+|EC2 instance type for worker nodes
 |'m5.2xlarge'
 
 |`ec2_volume_size_root.bootstrap`
-|a
+|Size of bootstrap EC2 root volume
 |120
 
 |`ec2_volume_size_root.master`
-|a
+|Size of master EC2 root volume
 |120
 
 |`ec2_volume_size_root.worker`
-|a
+|Size of worker EC2 root volume
 |120
 
 |`ec2_iam_role.bootstrap`
@@ -123,6 +119,18 @@ Required installation configuration parameters are described in the following ta
 
 |`ec2_iam_role.worker`
 |a
+|'openshift4-worker-role'
+
+|`ec2_instance_profile.bootstrap`
+|Defaults to the same name as the bootstrap iam role
+|'openshift4-boostrap-role'
+
+|`ec2_instance_profile.master`
+|Defaults to the same name as the master iam role
+|'openshift4-master-role'
+
+|`ec2_instance_profile.worker`
+|Defaults to the same name as the worker iam role
 |'openshift4-worker-role'
 
 |`s3_bucket`

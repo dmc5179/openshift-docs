@@ -38,12 +38,14 @@ $ export AWS_DEFAULT_REGION=<aws_region> <1>
 ----
 <1> The AWS region, like `us-iso-east-1`.
 
-. Set the ansible variables
 . Change directories to the location of the ansible playbooks
 [source,terminal]
 ----
 $ cd /usr/share/openshift4-aws-iso/playbooks/
 ----
+
+. Set the ansible variables in playbooks/group_vars/all/all.yml
+
 . Generate the installation configuration files
 [source,terminal]
 ----
@@ -53,28 +55,31 @@ $ ansible-playbook generate_ignition.yaml
 ====
 The configuration files contain a 24-hour CA used only during install. Installation of the OpenShift cluster must be completed within 24 hours of generating the configuration files or the cluster resources will need to be cleaned up and the procedure restarted at this step.
 ====
+
 . Stage the installation configuration files in S3
 [source,terminal]
 ----
 $ ansible-playbook stage_ignition.yaml
 ----
-. Deploy the Security Groups and IAM CloudFormation Template
-[source,terminal]
-----
-$ ansible-playbook deploy_security.yaml
-----
+
 . Deploy the Infrastructure (LBs and Route53) CloudFormation Template
 [source,terminal]
 ----
 $ ansible-playbook deploy_infra.yaml
 ----
+
+. Deploy the Security Groups and IAM CloudFormation Template
+[source,terminal]
+----
+$ ansible-playbook deploy_security.yaml
+----
+
 . Deploy the OpenShift bootstrap CloudFormation Template
 ----
 $ ansible-playbook deploy_bootstrap.yaml
 ----
+
 . Deploy the OpenShift Control Plan CloudFormation Template
 ----
 $ ansible-playbook deploy_control_plane.yaml
 ----
-
-
