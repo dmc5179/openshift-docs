@@ -62,28 +62,32 @@ Required installation configuration parameters are described in the following ta
 |'172.30.0.0/16'
 
 |`mtu`
-|The MTU set on each cluster node. Note that an incorrect value can cause bizzare behavior due to packet loss
+|The MTU set on each cluster node. Note that the MTU for all AWS regions is not the same. 8500 is the default and has been tested. Other values can be used
 |8500
 
+|`ocp_sdn`
+|Either OpenShiftSDN or OVNKubernetes. OpenShiftSDN is a CNI plugin for all-Linux networks. OVNKubernetes is a CNI plugin for Linux networks and hybrid networks that contain both Linux and Windows servers. The default value is OVNKubernetes
+| Defaults to OpenShiftSDN for AWS installs. Supports OVNKubernetes as well.
+
 |`network_policy`
-|a
+|Default namespace isolation model. Defaults to Network Policy to enable multitenant isolation within the OpenShift cluster
 |'NetworkPolicy'
 
 |`vpc_cidr`
-|a
+|VPC CIDR
 |'10.0.0.0/16'
 
 |`subnet_bits`
-|a
+|Number of bits to allocate to each subnet created by the cloud formation template when creating the network
 |12
 
 |`ec2_key_name`
-|a
-|'a'
+|The name of the ec2 key pair to use when launching instances for the cluster. Note that this will be overwritten by the ssh key settings added to the install-config.yaml
+|unset
 
 |`vpc_id`
 |VPC ID to install OpenShift cluster
-|'vpc-'
+|unset
 
 |`ec2_instance_type.bootstrap`
 |EC2 instance type for bootstrap node
@@ -99,43 +103,43 @@ Required installation configuration parameters are described in the following ta
 
 |`ec2_volume_size_root.bootstrap`
 |Size of bootstrap EC2 root volume
-|120
+|Defaults to 120 GBs
 
 |`ec2_volume_size_root.master`
 |Size of master EC2 root volume
-|120
+|Defaults to 120 GBs
 
 |`ec2_volume_size_root.worker`
 |Size of worker EC2 root volume
-|120
+|Defaults to 120 GBs
 
 |`ec2_iam_role.bootstrap`
-|a
+|IAM role that will be assigned to the bootstrap node
 |'openshift4-boostrap-role'
 
 |`ec2_iam_role.master`
-|a
+|IAM role that will be assigned to the control plane nodes
 |'openshift4-master-role'
 
 |`ec2_iam_role.worker`
-|a
+|IAM role that will be assigned to the worker nodes
 |'openshift4-worker-role'
 
 |`ec2_instance_profile.bootstrap`
-|Defaults to the same name as the bootstrap iam role
+|IAM instance profile that will be assigned to the bootstrap node. Defaults to the same name as the bootstrap iam role
 |'openshift4-boostrap-role'
 
 |`ec2_instance_profile.master`
-|Defaults to the same name as the master iam role
+|IAM instance profile that will be assigned to the control plane nodes. Defaults to the same name as the master iam role
 |'openshift4-master-role'
 
 |`ec2_instance_profile.worker`
-|Defaults to the same name as the worker iam role
+|IAM role that will be assigned to the worker nodes. Defaults to the same name as the worker iam role
 |'openshift4-worker-role'
 
 |`s3_bucket`
 |S3 Bucket to host ignition config files during installation
-|'a'
+|unset
 
 |`s3_path`
 |Path in S3 bucket to host ignition config files during installation

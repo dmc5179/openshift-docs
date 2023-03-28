@@ -75,11 +75,27 @@ $ ansible-playbook deploy_security.yaml
 ----
 
 . Deploy the OpenShift bootstrap CloudFormation Template
+[source,terminal]
 ----
 $ ansible-playbook deploy_bootstrap.yaml
 ----
 
 . Deploy the OpenShift Control Plan CloudFormation Template
+[source,terminal]
 ----
 $ ansible-playbook deploy_control_plane.yaml
 ----
+
+. The openshift-install command can be used to watch the progress of the bootstrap node
+[source,terminal]
+----
+$ openshift-install wait-for bootstrap-complete --log-level=debug --dir <path_to_cluster_working_dir> <1>
+----
+<1> Path to the location of the config file created by openshift-install create ignition-configs. Defaults to /opt/openshift/cluster
+
+. The openshift-install command can be used to watch the progress of the cluster formation
+[source,terminal]
+----
+$ openshift-install wait-for install-complete --log-level=debug --dir <path_to_cluster_working_dir> <1>
+----
+<1> Path to the location of the config file created by openshift-install create ignition-configs. Defaults to /opt/openshift/cluster
